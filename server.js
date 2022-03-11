@@ -53,6 +53,12 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 }
 
+// find animal by ID#
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
 
 // get all the data from animals.jsona and display on the webpage
 app.get('/api/animals', (req, res) => {
@@ -62,6 +68,16 @@ app.get('/api/animals', (req, res) => {
     }
     res.json(results);
 });
+
+//Get animal by ID
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+        res.json(result); // send the result if a match is found
+    } else {
+        res.send(404); // send 404 if no match is found
+    }
+})
 
 
 // Listen for local port 3001
