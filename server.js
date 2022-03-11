@@ -10,6 +10,10 @@ const { animals } = require('./data/animals'); // import / require the animals d
 const PORT = process.env.PORT || 3001;
 const app = express(); // Create and instance of the app.
 
+
+//  this provides a file path to a given directory and makes its contents static resoourcse which are available throughout the program
+app.use(express.static('public'));
+
 // parse incoming string or arry data.  This is a method built into Express.js. It takes incoming 
 // POST data and converts it to key/value pairings that can be accessed in the req.body object.
 app.use(express.urlencoded({ extedned: true})); // extended: true instructs server that there may be sub-array data nested inside as well
@@ -134,6 +138,25 @@ app.get('/api/animals/:id', (req, res) => {
     }
 })
 
+// serve up the index page
+app.get('/', (req, res) => { // the / represents the root route of the server
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+// path to animals page
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+// path to zookeepers page
+app.get('zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+// * is a wildcard operator. THis get() will redirect to index.html if an undefined path is entered
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 // Listen for local port 3001
 app.listen(PORT, () => {
