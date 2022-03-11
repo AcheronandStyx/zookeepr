@@ -4,7 +4,8 @@ const express = require('express');
 
 const { animals } = require('./data/animals'); // import / require the animals data
 
-
+// use the port 3001 if it is set, otherwise default to 80 for the herkou environment
+const PORT = process.env.PORT || 3001;
 const app = express(); // Create and instance of the app.
 
 
@@ -64,6 +65,6 @@ app.get('/api/animals', (req, res) => {
 
 
 // Listen for local port 3001
-app.listen(3001, () => {
-    console.log(`API server no on port 3001!`);
+app.listen(PORT, () => {
+    console.log(`API server no on port ${PORT}!`);
 });
