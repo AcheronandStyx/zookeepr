@@ -1,22 +1,26 @@
 const path = require('path');
 const router = require('express').Router();
 
-// serve up the index page
-router.get('/', (req, res) => { // the / represents the root route of the server
+// Serve up the index page '/' brings us to the root route of the server
+router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/index.html'));
 });
 
-// path to animals page
+// Route to serve up the animals.html page
 router.get('/animals', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/animals.html'));
 });
 
-// path to zookeepers page
-router.get('zookeepers', (req, res) => {
+// Serve up Zookeepers
+router.get('/zookeepers', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/zookeepers.html'));
 });
+/*
+ * is a wildcard and this makes any undefined route go to index.html. The order of your routes matters! 
+The * route should always come last. Otherwise, it will take precedence over named routes, and you won't 
+see what you expect to see on routes.
+*/
 
-// * is a wildcard operator. THis get() will redirect to index.html if an undefined path is entered
 router.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/index.html'));
 });

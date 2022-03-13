@@ -7,6 +7,7 @@ const router = require('express').Router(); // create an instance of router
 router.post('/animals', (req, res) => {
     // req.body is where out incoming content will be
 
+    console.log(animals);
     // animals.json has id's corresponding to array indexes. So the next 
     // id is equal to the length of the array
     req.body.id = animals.length.toString();

@@ -31,6 +31,7 @@ const getAnimals = (formData = {}) => {
 
   console.log(queryUrl);
 
+  // added standard fetch() usage 
   fetch(queryUrl)
     .then(response => {
       if (!response.ok) {
@@ -42,6 +43,7 @@ const getAnimals = (formData = {}) => {
       console.log(animalData);
       printResults(animalData);
     });
+
 };
 
 const handleGetAnimalsSubmit = event => {

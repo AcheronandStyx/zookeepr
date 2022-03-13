@@ -27,23 +27,22 @@ const handleAnimalFormSubmit = event => {
   }
   const animalObject = { name, species, diet, personalityTraits };
 
-
-  // gathers the user entered data into an object and passes it to the backend
-  fetch('/api/animals', { // ecause the request is coming from the server, we don't have to specify the full URL.
+  // add to handled fetch
+  fetch('/api/animals', {
     method: 'POST',
-    headers: { // set the headers property to inform the request that this is going to be JSON dat
+    headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/josn'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(animalObject)
   })
     .then(response => {
-      if (respomse.ok) {
+      if (response.ok) {
         return response.json();
       }
       alert('Error: ' + response.statusText);
     })
-    .then(postresponse => {
+    .then(postResponse => {
       console.log(postResponse);
       alert('Thank you for adding an animal!');
     });
@@ -80,5 +79,5 @@ const handleZookeeperFormSubmit = event => {
     });
 };
 
-$animalForm.addEventListener('submit', handleAnimalFormSubmit);
 $zookeeperForm.addEventListener('submit', handleZookeeperFormSubmit);
+$animalForm.addEventListener('submit', handleAnimalFormSubmit);
